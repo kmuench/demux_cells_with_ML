@@ -1,6 +1,5 @@
 # demux_cells_with_ML
-<<<<<<< HEAD
-Applying machine learning to demultiplex scRNA-Seq data and gain insights into developmental neurobiology
+## Applying machine learning to demultiplex scRNA-Seq data and gain insights into developmental neurobiology
 =======
 Demultiplexing single cell RNA-Seq data using data science + biology
 
