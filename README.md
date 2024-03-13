@@ -1,7 +1,14 @@
-demux_cells_with_ML
+Section Title
 =============
-Applying machine learning to demultiplex scRNA-Seq data and gain insights into developmental neurobiology
+demux_cells_with_ML
 ======================
+
+Subsection Subtitle
+-------------------
+Applying machine learning to demultiplex scRNA-Seq data and gain insights into developmental neurobiology
+--------------------------
+
+[ Description of Project ](#desc) | [ Repo Structure ](#design) 
 
 Problem:
 - In order to improve statistical power to detect differences between conditions, I need to maximize the number of samples I can run, given a fixed budget. The bottleneck for sample cost was the cost of the 10X chip, so I wanted to know: can I multiplex samples on a single chip using their gene expression signatures?
@@ -17,8 +24,8 @@ How can this be used?
 
 # # 
 
+<a name="desc"></a>
 # Description of Project
-
 ## Introduction
 In this project, I will demonstrate that transcriptomic profiles can be used to distinguish male and female cells in scRNA-Seq. I will show that single-gene thresholding works remarkably well for identifying female cells, but that machine learning methods can be used to further improve cell sex classification.
 
@@ -58,22 +65,26 @@ My approach was as follows:
 - Use five-fold cross-validation-based grid search/randomized search to identify an appropriate models from a list of candidates
 - After hyperparameter tuning and comparing performance, pick a set of optimal models whose performance can be compared to Xist-based thresholding and applied to new datasets to study generalizability
 
-## Limitations**
+## Limitations
 It was not possible to collect a dataset that perfectly balanced all features (eg., order of sample extraction, perfectly balancing). An attempt were made to balance for the largest possible confounding factors, e.g. two brains in male and female alike came from LPS-exposed pregnancies. Nevertheless, it is difficult to judge to what extent a failure of these results to generalize might be due to the fact that some of these gene signatures may be produced by the interaction of sex and other factors, e.g. LPS exposure.
 
-## Conclusions**
+## Conclusions
 After a biologically-grounded model exploration process, I used a regularized logistic regression and features identified using a K-best/false positive rate-controlling strategy, I was able to achieve 97% accuracy in identifying male and female cells. 
 
 The feature set selected was also interesting. Not all of these genes were related to sex chromosomes or sexual differentiation in mice, suggesting that complex networks of gene regulation may already be at play in a manner that distinguishes male from female cells.
 
 My hope is that this method demonstrates the possibility of discovering novel gene signatures that inspire both biological hypotheses and solve practical problems related to optimizing experiment design given resource constraints.
 
-## Additional Notes**
+## Additional Notes
 - This experiment was originally designed not only to facilitate the above study but to study the effects of a genotype on brain development. Since this dataset has not yet been published, I have de-identified some features of the dataset (specifically, genetic variant of the mouse) out of respect for my scientific colleagues who might want to publish this work.
 - I did not attempt to remove doublets as it is hard to tell the difference between these and cells that legitimately represent cells that are mitosing, and possibly cells which are mitotic yet in the process of assuming a new cortical layer identity
 - I wish to draw a distinction in this work between sex (the structural, functional, and behavioral characteristics of living things determined by sex chromosome), as opposed to gender (an identity) ([Torgrimson and Minson 2005](https://journals.physiology.org/doi/full/10.1152/japplphysiol.00376.2005)). It is not correct or rigorous to interpret this work as evidence for the prenatal determination of a chromosome-dependent gender identity.
 
-# TODO: Coming soon
+<a name="design"></a>
+# Repository Structure
+There is a config file in the utils subdirectory that contains information for the specific run, e.g. data input and output locations.
+
+## TODO: Coming soon
 - Model performance
     - Explore feature transformations (trading interpretability for better abstractability/classification)
     - Apply feature engineering techniques that take into account matrix sparsity, or cell identity for example (e.g., will a classifier improve if it knows it is looking at a glutamatergic neuron?)
