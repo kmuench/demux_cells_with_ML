@@ -66,6 +66,9 @@ The feature set selected was also interesting. Not all of these genes were relat
 
 My hope is that this method demonstrates the possibility of discovering novel gene signatures that inspire both biological hypotheses and solve practical problems related to optimizing experiment design given resource constraints.
 
+## Repo Organization
+Within "utils", there is a configuration file that contains some essential organizational notebook paths (e.g., the output directory, the data input locations).
+
 ## Additional Notes**
 - This experiment was originally designed not only to facilitate the above study but to study the effects of a genotype on brain development. Since this dataset has not yet been published, I have de-identified some features of the dataset (specifically, genetic variant of the mouse) out of respect for my scientific colleagues who might want to publish this work.
 - I did not attempt to remove doublets as it is hard to tell the difference between these and cells that legitimately represent cells that are mitosing, and possibly cells which are mitotic yet in the process of assuming a new cortical layer identity
