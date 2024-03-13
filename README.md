@@ -1,5 +1,7 @@
-# demux_cells_with_ML
-## Applying machine learning to demultiplex scRNA-Seq data and gain insights into developmental neurobiology
+demux_cells_with_ML
+=============
+Applying machine learning to demultiplex scRNA-Seq data and gain insights into developmental neurobiology
+======================
 
 Problem:
 - In order to improve statistical power to detect differences between conditions, I need to maximize the number of samples I can run, given a fixed budget. The bottleneck for sample cost was the cost of the 10X chip, so I wanted to know: can I multiplex samples on a single chip using their gene expression signatures?
