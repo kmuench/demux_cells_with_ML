@@ -1,8 +1,8 @@
-# demux_cells_with_ML:
-## Applying machine learning to demultiplex scRNA-Seq data and gain insights into developmental neurobiology
+# demux_cells_with_ML
 
-[ Description of Project ](#desc) | [ Repo Structure ](#design) 
+[ Introduction ](#intro) | [ Data Collection ](#data) | [ Approach ](#approach) | [ Limitations ](#limit) | [ Conclusions ](#conc) | [ Repo Structure ](#design) 
 
+demux_cells_with_ML: Applying machine learning to demultiplex scRNA-Seq data and gain insights into developmental neurobiology
 
 Problem:
 - In order to improve statistical power to detect differences between conditions, I need to maximize the number of samples I can run, given a fixed budget. The bottleneck for sample cost was the cost of the 10X chip, so I wanted to know: can I multiplex samples on a single chip using their gene expression signatures?
@@ -18,8 +18,8 @@ How can this be used?
 
 # # 
 
-<a name="desc"></a>
 # Description of Project
+<a name="intro"></a>
 ## Introduction
 In this project, I will demonstrate that transcriptomic profiles can be used to distinguish male and female cells in scRNA-Seq. I will show that single-gene thresholding works remarkably well for identifying female cells, but that machine learning methods can be used to further improve cell sex classification.
 
@@ -35,9 +35,11 @@ There are many good reasons why sex gene expression might be a positive solution
 - **Highlight specific features that contribute to male vs. female brain development** in the early developing brain;
 - **Encourage the inclusion of both male and female samples** in neuroscience research, which traditionally has been biased towards collecting data from male samples or fails to report sample sex, despite the potential ramifications for human health research ( [Mamlouk 2020](https://www.sciencedirect.com/science/article/pii/S0091302220300261?casa_token=J99EnQaWI4EAAAAA:1guIwA5Xa77U4x1vCOiRe7FB3g-9impuCdwXoWkekqcmvbKXTv3dLQz3RKjK3_i8mfcalNEr_Q) ), [Plevkova 2020](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8603716/) ).
 
+<a name="data"></a>
 ## Data collection
 I designed an experiment to collect cells that were either from male or female mice, at day E13.5 in brain development. The sex of the mice was confirmed by PCR, and these samples were sequenced separately. I also pooled some known male/female samples to further study how classification might look in cells from a pooled sample.
 
+<a name="approach"></a>
 ## Approach
 
 I discovered that categorizing cells as female based on raw expression of Xist > 1 was already very successful (~90% accurate), albeit not perfect - many female cells did not express Xist, and a small minority of male cells (likely erroneously) had associated Xist reads. I can imagine situations in which that would be an unacceptably large margin of error in a demultiplexing experiment. Therefore, I decided to try and engineer a model that could perform binary classification to categorize murine neural cells as male or female on the basis of their scRNA-Seq profile.
@@ -59,9 +61,11 @@ My approach was as follows:
 - Use five-fold cross-validation-based grid search/randomized search to identify an appropriate models from a list of candidates
 - After hyperparameter tuning and comparing performance, pick a set of optimal models whose performance can be compared to Xist-based thresholding and applied to new datasets to study generalizability
 
+<a name="limit"></a>
 ## Limitations
 It was not possible to collect a dataset that perfectly balanced all features (eg., order of sample extraction, perfectly balancing). An attempt were made to balance for the largest possible confounding factors, e.g. two brains in male and female alike came from LPS-exposed pregnancies. Nevertheless, it is difficult to judge to what extent a failure of these results to generalize might be due to the fact that some of these gene signatures may be produced by the interaction of sex and other factors, e.g. LPS exposure.
 
+<a name="conc"></a>
 ## Conclusions
 After a biologically-grounded model exploration process, I used a regularized logistic regression and features identified using a K-best/false positive rate-controlling strategy, I was able to achieve 97% accuracy in identifying male and female cells. 
 
